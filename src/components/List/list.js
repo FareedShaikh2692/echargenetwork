@@ -54,9 +54,9 @@ const List=()=>{
         />
         <Entypo
         name="sound-mix"
-        size={35}
+        size={30}
         color="black"
-        style={{paddingTop:15}}
+        style={{paddingTop:15,paddingStart:5}}
         />
       </View>
       <View
@@ -148,6 +148,7 @@ const styles=StyleSheet.create({
         flex:1,
         backgroundColor: "#f2f4f5",
         width: '90%',
+        borderRadius:5,
         marginTop: 20,
         padding: 12,
         paddingStart:35,
