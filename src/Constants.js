@@ -5,7 +5,8 @@ const Constants = {
     height: Dimensions.get('window').height,
     colors: {
         navBarColor:"#353b3c",
-        iconColor:"#4a7d34"
+        iconColor:"#4a7d34",
+        textColor:"#84a376"
     },
     fontFamily: 'Avenir-Light',
     }
