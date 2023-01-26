@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     },
     div: {
         flexDirection: 'row',
-        alignItems: "flex-start",
+        alignItems: "center",
         paddingBottom: 10,
         flex: 1,
         marginStart: 10,
@@ -104,9 +104,9 @@ const Me = () => {
                     />
                 </View>
                 <View style={{ paddingLeft: 20, paddingTop: 10 }}>
-                    <Text style={styles.titleText}>Welcome</Text>
+                    <Text style={[styles.titleText,{marginLeft:0}]}>Welcome</Text>
                     <Text style={styles.username}>Joyraj</Text>
-                    <Text>Balence:0</Text>
+                    <Text>Balance:0</Text>
                 </View>
             </View>
 
