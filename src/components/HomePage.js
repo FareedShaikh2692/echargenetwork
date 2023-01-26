@@ -15,7 +15,7 @@ const HomePage=()=>{
     const [activeTab,setactiveTab]=useState("me")
     return(
         <View style={{height:"100%",flex:1,backgroundColor:"white"}}>
-        <ScrollView style={{height:"100%",flex:1,marginBottom:5}}>
+        <ScrollView style={{height:"100%",flex:1}}>
         {activeTab==="map"?
         <Map/>
         :
