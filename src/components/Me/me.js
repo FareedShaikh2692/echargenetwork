@@ -12,7 +12,9 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 20,
         fontWeight: 'bold',
-        marginLeft: 10
+        marginLeft: 10,
+        color:"#808080"
+        
     },
     username: {
         fontSize: 18,
