@@ -168,7 +168,7 @@ const Me = () => {
                         color='#ffffff'
                         size={35}
                     />
-                    <Text style={styles.titleText} >Balence</Text>
+                    <Text style={styles.titleText} >Balance</Text>
                 </View>
             </View>
             <View style={{ flexDirection: 'row', marginTop: 5 }} >

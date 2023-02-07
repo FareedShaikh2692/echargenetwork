@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Linking, StyleSheet, Text, ToastAndroid, View } from "react-native";
 import { RNCamera } from 'react-native-camera';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import Constants from "../../Constants";
@@ -11,14 +11,19 @@ const Charge=()=>{
         if(barCode)
         barCode.forEach(barcode => console.log("barcode",barcode.data))
     },[barCode])
+    const onSuccess = (e) => {
+    Linking.openURL(e.data).catch(err =>
+      console.error('An error occured', err)
+    );
+  };
     return(
         <View >
         <QRCodeScanner
-        onRead={(e)=>console.warn("Scanned QR value!",e)}
+        onRead={onSuccess}
         flashMode={RNCamera.Constants.FlashMode.torch}
         fadeIn
         reactivate
-        reactivateTimeout={10}
+        reactivateTimeout={5}
         topContent={
             <View style={{width:"100%"}}>
           <Text style={styles.centerText}>
