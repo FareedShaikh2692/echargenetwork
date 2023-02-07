@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Entypo from "react-native-vector-icons/Entypo"
@@ -6,7 +6,54 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import Constants from "../../Constants";
 const List = () => {
   const [filter, setfilter] = useState("name")
-
+  const [searchText,setsearchText]=useState("")
+  const [ListData,setListData]=useState([
+    {
+      text:"AUDI ME (DAFZA tenants only)",
+      subText:"DAFZA",
+      even:true
+},
+{
+  text:"AUDI ME (AUDI staff only)",
+  subText:"DAFZA",
+  even:false
+},
+{
+  text:"Adagio Premium The Palm 1",
+  subText:"Adagio Premium - The Palm - Dubai - ...",
+  even:true
+},
+{
+  text:"Adagio Premium The Palm 2",
+  subText:"Adagio Premium - The Palm - Dubai - ...",
+  even:false
+},
+{
+text:"Al Bahar Hotel & Resort",
+subText:"Al Ghurfa, Fujairah, UAE",
+even:true
+},
+{
+text:"Al Forsan Main Building AC charger",
+subText:"Al Forsan, Abu Dhabi",
+even:false
+},
+{
+  text:"Al Forsan Main Building DC charger",
+  subText:"Al Forsan, Abu Dhabi",
+  even:true
+  },
+  {
+    text:"Al Forsan Town Square Spinneys",
+    subText:"Al Forsan, Abu Dhabi, UAE",
+    even:false
+    },
+    {
+      text:"Al Forsan Water Sports",
+      subText:"Al Forsan, Abu Dhabi",
+      even:true
+      },
+])
   const ListItem = (props) => {
     return (
       <View style={{
@@ -37,15 +84,18 @@ const List = () => {
       </View>
     );
   }
+
   return (
     <View>
       <View style={styles.passwordContainer}>
         <TextInput
           style={styles.textInput}
           autoCorrect={false}
-          secureTextEntry
+          // secureTextEntry
+          value={searchText}
           placeholder="Where do you want to charge to"
           placeholderTextColor={"#d6d8da"}
+          onChangeText={(e)=>setsearchText(e)}
         />
         <FontAwesome
           style={styles.iconStyle}
@@ -64,7 +114,9 @@ const List = () => {
         style={styles.bottomLine}
       />
       <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 20, marginEnd: 10, marginBottom: 15 }}>
-        <Text onPress={() => setfilter("sort")} style={[styles.textStyle, { color: filter === "sort" ? Constants.colors.textColor : null }]}>
+        <Text 
+        // onPress={() => setfilter("sort")}
+         style={[styles.textStyle, { color: filter === "sort" ? Constants.colors.textColor : null }]}>
           Sort By
         </Text>
         <Text onPress={() => setfilter("name")} style={[styles.textStyle, { color: filter === "name" ? Constants.colors.textColor : null }]}>
@@ -74,47 +126,29 @@ const List = () => {
           Distance
         </Text>
       </View>
-      <ListItem
-        even
-        text="AUDI ME (DAFZA tenants only)"
-        subText="DAFZA"
+     {ListData.length>0&&ListData?.filter((i)=>i.text.toLowerCase().includes(searchText.toLowerCase())||i.subText.toLowerCase().includes(searchText.toLowerCase())).length>0?
+      ListData?.filter((i)=>i.text.toLowerCase().includes(searchText.toLowerCase())||i.subText.toLowerCase().includes(searchText.toLowerCase())).sort(function(a, b){
+        if(filter=="name")
+        {if(a.text < b.text) { return -1; }
+        if(a.text > b.text) { return 1; }
+        return 0;}
+        else 
+        {if(a.subText < b.subText) { return -1; }
+        if(a.subText > b.subText) { return 1; }
+        return 0;}
+    })
+      ?.map((data)=>(
+        <ListItem
+        even={data.even}
+        text={data.text}
+        subText={data.subText}
       />
-      <ListItem
-        text="AUDI ME (AUDI staff only)"
-        subText="DAFZA"
-      />
-      <ListItem
-        even
-        text="Adagio Premium The Palm 1"
-        subText="Adagio Premium - The Palm - Dubai - ..."
-      />
-      <ListItem
-        text="Adagio Premium The Palm 2"
-        subText="Adagio Premium - The Palm - Dubai - ..."
-      />
-      <ListItem
-        even
-        text="Al Bahar Hotel & Resort"
-        subText="Al Ghurfa, Fujairah, UAE"
-      />
-      <ListItem
-        text="Al Forsan Main Building AC charger"
-        subText="Al Forsan, Abu Dhabi"
-      />
-      <ListItem
-        even
-        text="Al Forsan Main Building DC charger"
-        subText="Al Forsan, Abu Dhabi"
-      />
-      <ListItem
-        text="Al Forsan Town Square Spinneys"
-        subText="Al Forsan, Abu Dhabi, UAE"
-      />
-      <ListItem
-        even
-        text="Al Forsan Water Sports"
-        subText="Al Forsan, Abu Dhabi"
-      />
+      )):<Text style={{ fontWeight: "800", color: "#606664", fontSize: 17 }}>
+      No data found
+    </Text>
+     }
+      
+     
     </View>
   );
 }
