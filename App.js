@@ -8,6 +8,7 @@ const App=()=>{
     <SafeAreaView style={{flex:1}}>
     <NavigationContainer style={{flex:1}}>
     <Routes/>
+    
     </NavigationContainer>
     </SafeAreaView>
   );
