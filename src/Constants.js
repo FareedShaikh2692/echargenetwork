@@ -6,7 +6,8 @@ const Constants = {
     colors: {
         navBarColor:"#353b3c",
         iconColor:"#4a7d34",
-        textColor:"#84a376"
+        textColor:"#84a376",
+        primaryColor:"#5dae3e"
     },
     fontFamily: 'Avenir-Light',
     }

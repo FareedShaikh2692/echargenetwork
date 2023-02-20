@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View,ScrollView } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 import Entypo from "react-native-vector-icons/Entypo"
 import Ionicons from "react-native-vector-icons/Ionicons"
 import Constants from "../../Constants";
+import { useNavigation } from "@react-navigation/native";
 const List = () => {
   const [filter, setfilter] = useState("name")
   const [searchText,setsearchText]=useState("")
@@ -55,10 +56,16 @@ even:false
       },
 ])
   const ListItem = (props) => {
+    const navigation=useNavigation()
     return (
-      <View style={{
+      <Pressable onPress={()=>navigation.navigate("/list-desc",{
+        text:props.text,subtext:props?.subText
+      })}>
+      <View 
+      style={{
         padding: 12,
-        flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: props.even ? "#eef6eb" : "#dbedd5"
+        flexDirection: "row", justifyContent: "space-between", alignItems: "center",
+        backgroundColor: props.index%2==0 ? "#eef6eb" : "#dbedd5"
       }}>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons
@@ -82,11 +89,13 @@ even:false
           color="#00000"
         />
       </View>
+      </Pressable>
     );
   }
 
   return (
-    <View>
+    <View style={{height:"100%",flex:1,backgroundColor:"white"}}>
+        <ScrollView style={{height:"100%",flex:1}}>
       <View style={styles.passwordContainer}>
         <TextInput
           style={styles.textInput}
@@ -137,9 +146,9 @@ even:false
         if(a.subText > b.subText) { return 1; }
         return 0;}
     })
-      ?.map((data)=>(
+      ?.map((data,index)=>(
         <ListItem
-        even={data.even}
+        index={index}
         text={data.text}
         subText={data.subText}
       />
@@ -148,7 +157,7 @@ even:false
     </Text>
      }
       
-     
+     </ScrollView>
     </View>
   );
 }
